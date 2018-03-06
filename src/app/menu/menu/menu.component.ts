@@ -65,7 +65,7 @@ export class MenuComponent implements OnInit, OnDestroy {
     this.currentMenu.subscribe(menu => {
       this.menu = menu
       this.broadcastObjectService.currentOrder.subscribe(order => {
-        this.order = order
+        this.order = order        
         if (this.order.products.keys().length == this.menu.length) {
           this.disable = false
         }

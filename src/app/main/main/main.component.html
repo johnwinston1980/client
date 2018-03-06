@@ -24,8 +24,6 @@
 
 <mat-tab-group class="demo-tab-group">
 
-
-
   <mat-tab label="Mapa">
     <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
       <agm-marker *ngFor="let provider of providers" [latitude]="provider.address.lat" [longitude]="provider.address.lng">
@@ -41,7 +39,5 @@
   <mat-tab label="Tiendas">
     <app-list-providers></app-list-providers>
   </mat-tab>
-
-
 
 </mat-tab-group>

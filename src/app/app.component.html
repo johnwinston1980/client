@@ -1,10 +1,12 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
+        
         <div *ngIf="(userAuthState | async)">
             <img src="{{user.photoURL}}" width="60px" height="60px">
             <label>{{user.displayName}}</label>
             <a (click)="orders()">My Orders</a>
         </div>
+
         <div>
             <ul>
                 <li *ngIf="!(userAuthState | async)">
@@ -15,6 +17,7 @@
                 </li>
             </ul>
         </div>
+        
     </mat-drawer>
     <div>
         <app-navbar (uploaded)="someMethod($event)"></app-navbar>
