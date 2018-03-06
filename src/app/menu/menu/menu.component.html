@@ -1,0 +1,20 @@
+<h3>Menu</h3>
+<mat-list>
+  <ul>
+    <li *ngFor='let menuItem of menu'>
+      <h1 matSubheader>{{menuItem.categoryName}}</h1>
+
+      <mat-list-item *ngFor="let product of menuItem.products">
+        <img matListAvatar src="{{product.image}}" (click)="showDetails(product)">
+        <h4 matLine>{{product.name}}</h4>
+        <p matLine class="demo-2"> {{product.description}} </p>
+        <mat-checkbox type="checkbox" *ngIf="showCheckBox(product)" [(ngModel)]="checked" (change)="onSelectionChange(product, $event)">
+        </mat-checkbox>
+
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </li>
+  </ul>
+</mat-list>
+
+<button mat-button color="primary" [disabled]="disable" (click)="saveOrder()">Save Order</button>

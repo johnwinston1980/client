@@ -1,0 +1,14 @@
+<div>
+  {{ product.name }} <br>
+  {{ product.description }}
+</div>
+<div>
+  <ul>
+    <li *ngFor="let image of images">
+      <img src="{{image.url}}" width="60px" height="60px">
+    </li>
+  </ul>
+</div>
+<div *ngIf="!isSelected()">
+  <button (click)="addToCurrentOrder()">Add to order</button>
+</div>

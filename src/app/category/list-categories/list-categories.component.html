@@ -1,0 +1,45 @@
+<!--<div class="container">
+
+  <ul>
+
+    <li *ngFor="let category of categories" (click)="showProducts(category.id)" class="row">
+
+
+      <img src="{{category.imgUrl}}" width="60px" height="60px">
+      <div *ngIf="!isSelected(category.id)">{{ category.name }}</div>
+      <div *ngIf="isSelected(category.id)" class="text-color">{{ category.name }}</div>
+      <div>{{ category.description }}</div>
+
+
+    </li>
+  </ul>
+
+</div>-->
+<h4>Categorias</h4>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let category of categories" (click)="showProducts(category.id)">
+    <img src="{{category.image}}" layout-fill>
+    <!--<mat-grid-tile-header>
+      <h3>{{ category.name }}</h3>
+    </mat-grid-tile-header>-->
+    <mat-grid-tile-footer>
+      <h5>{{ category.name }}</h5>
+    </mat-grid-tile-footer>
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<!--<mat-nav-list>
+  <mat-list-item *ngFor="let category of categories" (click)="showProducts(category.id)">
+    <img matListAvatar  src="{{category.imgUrl}}">
+    <h3 matLine *ngIf="!isSelected(category.id)">{{ category.name }}</h3>
+    <h3 matLine *ngIf="isSelected(category.id)" class="text-color">{{ category.name }}</h3>
+    <h3 matLine>{{ category.description }}</h3>
+  </mat-list-item>
+</mat-nav-list>-->
+
+
+<div>
+  <button mat-button (click)="saveOrder()">Save order</button>
+</div>

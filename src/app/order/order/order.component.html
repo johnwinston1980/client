@@ -1,0 +1,15 @@
+<mat-nav-list>
+    <mat-list-item *ngFor="let key of order.products.keys()">
+
+        <img matListAvatar src="{{order.products.get(key).image}}">
+        <h4 matLine>{{order.products.get(key).name}}</h4>
+        <p matLine class="demo-2"> {{order.products.get(key).description}} </p>
+
+      </mat-list-item>
+ </mat-nav-list>
+
+ <mat-form-field>
+    <textarea matInput placeholder="Special instructions"></textarea>
+  </mat-form-field>
+
+<button mat-button color="primary" (click)="openDialog()">Place order</button>

@@ -1,0 +1,32 @@
+.text-color{
+    background: blue;    
+}
+
+.container {
+    background: lightgray
+}
+
+ul {    
+    margin: 0px;
+    padding: 0px;
+  }
+
+.row {
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: 20% 60% 20%;
+    border-color: khaki;
+    border-style: solid;
+    border-width: 1px    
+}
+
+.img_main {
+    display: grid;
+    justify-self: center;
+    align-self: center;
+    background-size:100%;
+}
+
+
+
+

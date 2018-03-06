@@ -1,0 +1,15 @@
+<!--<div>
+  <ul>
+    <li *ngFor="let provider of providers" (click)="showCategories(provider)">
+      {{ provider.name }}
+    </li>
+  </ul>
+</div>-->
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let provider of providers" (click)="showCategories(provider)">
+    <img src="{{provider.image}}" layout-fill>
+    <mat-grid-tile-footer>
+      <h5>{{ provider.name }}</h5>
+    </mat-grid-tile-footer>
+  </mat-grid-tile>
+</mat-grid-list>

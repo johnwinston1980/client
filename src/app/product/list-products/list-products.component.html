@@ -1,0 +1,28 @@
+<!--<div>
+  <ul>
+    <li *ngFor="let product of products">
+      
+      
+      <div *ngIf="!isSelected(product)" (click)="showDetails(product)">
+        {{ product.name }}        
+      </div>
+        <div *ngIf="isSelected(product)" class="text-color" (click)="showDetails(product)">
+          {{ product.name }}          
+        </div>
+        <input type="checkbox" name="default_provider" value="product.id" [checked]="isSelected(product)" (change)="onSelectionChange(product)">
+        
+      
+    </li>
+  </ul>
+</div>-->
+
+
+
+<mat-nav-list>
+    <mat-list-item *ngFor="let product of products" (click)="showDetails(product)">
+      <img matListAvatar  src="{{product.image}}">
+      <h3 matLine *ngIf="!isSelected(product)" >{{ product.name }}</h3>
+      <h3 matLine *ngIf="isSelected(product)" class="text-color">{{ product.name }}</h3>
+      <h3 matLine>{{ product.description }}</h3>
+    </mat-list-item>
+  </mat-nav-list>
