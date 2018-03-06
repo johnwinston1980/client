@@ -33,7 +33,8 @@ import { MenuComponent } from './menu/menu/menu.component'
 
 import { CategoryService } from './category/shared/category.service'
 import { ProductService } from './product/shared/product.service';
-import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component'
+import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
+import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.component'
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.compon
     OrderComponent,
     ListOrdersComponent,
     MenuComponent,
-    LoginDialogComponent,    
+    LoginDialogComponent,
+    MessageDialogComponent,    
   ],
   imports: [
     BrowserModule,   
@@ -65,7 +67,7 @@ import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.compon
     MaterialModule,
     FormsModule,    
   ],
-  entryComponents: [ LoginDialogComponent ],
+  entryComponents: [ LoginDialogComponent, MessageDialogComponent ],
   providers: [ BroadcastObjectService, CategoryService, ProductService ],
   bootstrap: [AppComponent]
 })

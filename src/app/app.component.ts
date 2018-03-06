@@ -52,6 +52,11 @@ export class AppComponent implements OnInit{
       this.user = savedUser;
       this.broadcastObjectService.broadcastUser(savedUser);
     }
+
+    this.broadcastObjectService.currentAction.subscribe(action => {
+      this.drawer.toggle();
+    })
+
   }
 
   login() {

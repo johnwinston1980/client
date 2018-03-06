@@ -10,7 +10,10 @@
         <div>
             <ul>
                 <li *ngIf="!(userAuthState | async)">
-                    <a (click)="login()">Login</a>
+                    <div class="google" (click)="login()"></div>
+                </li>
+                <li *ngIf="!(userAuthState | async)">
+                    <div class="facebook" (click)="login()"></div>
                 </li>
                 <li *ngIf="(userAuthState | async)">
                     <a (click)="logout()">Logout</a>

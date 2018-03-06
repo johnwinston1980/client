@@ -1,8 +1,14 @@
-<h1>Orders are</h1>
-<div>
+<h3>Pending Orders</h3>
+<mat-list>
   <ul>
-    <li *ngFor="let order of orders">
-      {{order.status}}
+    <li *ngFor='let order of orders'>
+      <h1 matSubheader>{{order.providerName}}</h1>
+      <mat-list-item *ngFor="let product of order.products">
+        <img matListAvatar src="{{product.image}}">
+        <h4 matLine>{{product.name}}</h4>
+        <p matLine class="demo-2"> {{product.description}} </p>        
+      </mat-list-item>
+      <mat-divider></mat-divider>
     </li>
   </ul>
-</div>
+</mat-list>

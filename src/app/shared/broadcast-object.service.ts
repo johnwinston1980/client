@@ -13,7 +13,11 @@ export class BroadcastObjectService {
   product: Product = {}  
   order: Order = {}
   user: User = {}
+  action: string = ""
   
+
+  private actionSource = new BehaviorSubject<String>(this.action)
+  currentAction = this.actionSource.asObservable()
 
   private providerSource = new BehaviorSubject<Provider>(this.provider)
   currentProvider = this.providerSource.asObservable()
@@ -31,6 +35,10 @@ export class BroadcastObjectService {
 
   broadcastProvider(provider: Provider) {
     this.providerSource.next(provider)
+  }
+
+  broadcastAction(action: String) {
+    this.actionSource.next(action)
   }
 
   broadcastProduct(product: Product) {

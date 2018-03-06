@@ -1,29 +1,29 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 
-
 @Component({
-  selector: './login-dialog',
-  templateUrl: './login-dialog.component.html',
+  selector: 'app-message-dialog',
+  templateUrl: './message-dialog.component.html',
+  styleUrls: ['./message-dialog.component.css']
 })
-export class LoginDialogComponent {
+
+export class MessageDialogComponent {
+
+  message: any
 
   constructor(
-    public dialogRef: MatDialogRef<LoginDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    private broadcastObjectService: BroadcastObjectService) {
+    public dialogRef: MatDialogRef<MessageDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
     console.log(data)
+    this.message = data.showMessage
   }
 
   onNoClick(): void {
     this.dialogRef.close();    
   }
 
-  login(){
-    this.broadcastObjectService.broadcastAction('open')
+  resume(){    
     this.dialogRef.close();
   }
 
