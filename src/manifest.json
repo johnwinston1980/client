@@ -1,6 +1,9 @@
 {
   "short_name": "AirHorner",
   "name": "Kinlan's AirHorner of Infamy",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#2196F3",
   "icons": [
     {
       "src": "/assets/512x512.jpg",

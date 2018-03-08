@@ -20,6 +20,8 @@ export class AppComponent implements OnInit{
 
   userAuthState: Observable<firebase.User>;
 
+  authState: any = null;
+
   @ViewChild("drawer")
   public drawer: MatDrawer;
 
@@ -73,6 +75,26 @@ export class AppComponent implements OnInit{
       console.log(err);
     });
   }
+
+  googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+    return this.socialSignIn(provider);
+  }
+
+  facebookLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider()
+    return this.socialSignIn(provider);
+  }
+
+  private socialSignIn(provider) {
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) =>  {
+          this.authState = credential.user
+          //this.updateUserData()
+      })
+      .catch(error => console.log(error));
+  }
+
 
   logout() {
     this.afAuth.auth.signOut().then((success) => {

@@ -25,15 +25,20 @@
 <mat-tab-group class="demo-tab-group">
 
   <mat-tab label="Mapa">
-    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+    <agm-map #gm [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker [latitude]="latitude" [longitude]="longitude" >
+            <agm-info-window #infoWindow>
+                <h3>You are here!</h3>                
+              </agm-info-window>
+        </agm-marker>
       <agm-marker *ngFor="let provider of providers" [latitude]="provider.address.lat" [longitude]="provider.address.lng">
         <agm-info-window>
           <h3>{{provider.name}}</h3>
           <p>{{provider.address.formatted_address}}</p>
+          <button mat-button color="primary" (click)="goTo(provider)">Mostrar</button>
         </agm-info-window>
       </agm-marker>
-    </agm-map>
-    <app-list-providers></app-list-providers>
+    </agm-map>    
   </mat-tab>
 
   <mat-tab label="Tiendas">
