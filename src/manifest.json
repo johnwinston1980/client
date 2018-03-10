@@ -1,9 +1,11 @@
 {
-  "short_name": "AirHorner",
-  "name": "Kinlan's AirHorner of Infamy",
+  "short_name": "Cuban Food",
+  "name": "Cuban-Food ForThePeople",
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#2196F3",
+  "background_color": "#ffffff",
+  
   "icons": [
     {
       "src": "/assets/512x512.jpg",
@@ -11,5 +13,5 @@
       "sizes": "48x48"
     }    
   ],
-  "start_url": "index.html?launcher=true"
+  "start_url": "/"
 }

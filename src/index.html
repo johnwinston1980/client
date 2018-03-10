@@ -1,32 +1,30 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>Client</title>
-  <base href="/">
 
+  <meta charset="utf-8">
+  <title>Cuban Food</title>
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="manifest" href="/manifest.json">
-
+  
 </head>
-<script>
-  if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/service-worker.js', {scope: '/'})
-  .then(function(reg) {
-    // registration worked
-    console.log('Registration succeeded. Scope is ' + reg.scope);
-  }).catch(function(error) {
-    // registration failed
-    console.log('Registration failed with ' + error);
-  });
-}
-</script>
-
 <body>
   <app-root></app-root>
-</body>
 
+  <div class="splash"  id="content">
+      <img src="/assets/512x512.jpg" width="256px" alt="Angular5 PWA logo">
+      <h1>Hacker News PWA...</h1>
+   </div>
+  
+  <noscript>
+      <p>
+        Sorry, JavaScript must be enabled to use this app
+      </p>
+  </noscript>
+
+
+</body>
 </html>

@@ -36,6 +36,7 @@ import { ProductService } from './product/shared/product.service';
 import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
 import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.component'
 
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
   imports: [
     BrowserModule,   
     AppRoutingModule,
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     AngularFireModule.initializeApp(firebaseConfig),
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyD_TkIqjNZTh2o0KmV10tQ7G1tIPCrdEU4",
