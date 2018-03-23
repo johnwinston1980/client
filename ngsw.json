@@ -1,0 +1,65 @@
+{
+  "configVersion": 1,
+  "index": "https://johnwinston1980.github.io/client/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://johnwinston1980.github.io/client/index.html",
+        "https://johnwinston1980.github.io/client/inline.1a07289d5a602b6a9294.bundle.js",
+        "https://johnwinston1980.github.io/client/main.8883af50abc80892ac19.bundle.js",
+        "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js",
+        "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css"
+      ],
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/icon\\?family=Material\\+Icons"
+      ]
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://johnwinston1980.github.io/client/assets/512x512.jpg",
+        "https://johnwinston1980.github.io/client/assets/facebook.png",
+        "https://johnwinston1980.github.io/client/assets/google_sign_in.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api-freshness",
+      "patterns": [
+        "\\/"
+      ],
+      "strategy": "freshness",
+      "maxSize": 100,
+      "maxAge": 3600000,
+      "timeoutMs": 10000,
+      "version": 1
+    },
+    {
+      "name": "api-performance",
+      "patterns": [
+        "\\/"
+      ],
+      "strategy": "performance",
+      "maxSize": 100,
+      "maxAge": 86400000,
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "https://johnwinston1980.github.io/client/inline.1a07289d5a602b6a9294.bundle.js": "13e9811df835ae815933a93b953cae3f247f2337",
+    "https://johnwinston1980.github.io/client/assets/512x512.jpg": "1e5f07c1ee882f0e033ce63793984623aee4affa",
+    "https://johnwinston1980.github.io/client/main.8883af50abc80892ac19.bundle.js": "47094b3e6e20bb87c014e13a0b33cb64aa7bba04",
+    "https://johnwinston1980.github.io/client/assets/facebook.png": "768a4f926c1d4a8ed301d5882accaffa652673bf",
+    "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js": "c6df6b403364a6a888434d069ed8f0bfb8ef3655",
+    "https://johnwinston1980.github.io/client/assets/google_sign_in.png": "4ff596830b85f5c343130d5c89ae5d0b0995581a",
+    "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css": "14d48667df83327375e542f3d7206432b21af1c2",
+    "https://johnwinston1980.github.io/client/index.html": "590a14a20a1b3b0e3dc59dd7d1c38a1868c079d3"
+  }
+}
