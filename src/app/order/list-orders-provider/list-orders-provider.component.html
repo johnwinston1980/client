@@ -1,7 +1,7 @@
 <mat-list>
-  <mat-list-item *ngFor="let order of orders" (click)="openProvider(order)">
+  <mat-list-item *ngFor="let order of orders">
     <!--<img matListAvatar src="{{product.image}}">-->
     <h4 matLine>{{order.providerName}}</h4>
-    <p matLine class="demo-2"> {{order.date}} </p>
+    <p matLine class="demo-2"> {{order.status}} </p>
   </mat-list-item>
 </mat-list>

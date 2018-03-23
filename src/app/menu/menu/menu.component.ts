@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { ActivatedRoute, Router } from '@angular/router'
@@ -26,12 +26,8 @@ import * as _ from 'lodash'
 })
 export class MenuComponent implements OnInit, OnDestroy {
 
-  providerId: any
-  //menu: Menu
-  //categories: Array<Category>
-
-  /*categoriesHash: TSMap<string, string>
-  productsHash: TSMap<string, any>*/
+  //providerId: any
+  //@Input() providerId: string;
 
   menuSubject = new Subject<Array<MenuItem>>();
   currentMenu = this.menuSubject.asObservable()
@@ -43,7 +39,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   checked: boolean
   disable: boolean
 
-
   constructor(
     private broadcastObjectService: BroadcastObjectService,
     private router: Router,
@@ -51,35 +46,40 @@ export class MenuComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {
 
-    this.providerId = this.route.snapshot.params['provId']
-    this.menuService.init(this.providerId)
-
     this.disable = true
+    this.menuService.init(this.route.snapshot.params['provId'])
 
-    this.order.products = new TSMap<string, any>()
-    this.broadcastObjectService.broadcastOrder(this.order)
+    /*this.order.products = new TSMap<string, any>()
+    this.broadcastObjectService.broadcastOrder(this.order)*/
   }
 
 
   ngOnInit() {
+
+    this.order.products = new TSMap<string, any>()
+    this.broadcastObjectService.broadcastOrder(this.order)
+
+
     this.currentMenu.subscribe(menu => {
       this.menu = menu
-      this.broadcastObjectService.currentOrder.subscribe(order => {
-        this.order = order        
+      /*this.broadcastObjectService.currentOrder.subscribe(order => {
+        this.order = order
         if (this.order.products.keys().length == this.menu.length) {
           this.disable = false
         }
-      })
+      })*/
     })
+
     this.menuService.getCategories().then(cat => {
       this.menuSubject.next(cat)
     }).catch(error => {
       console.log(error)
     })
+
   }
 
   ngOnDestroy() {
-    
+
   }
 
   showDetails(product: Product) {

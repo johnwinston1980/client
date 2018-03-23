@@ -32,9 +32,9 @@ export class ListProvidersComponent implements OnInit, OnDestroy {
 
   }
 
-  showCategories(provider) {
+  openProvider(provider) {
     this.broadcastObjectService.broadcastProvider(provider)
     //this.router.navigate(['/list-categories', provider.id])
-    this.router.navigate(['/menu', provider.id])
+    this.router.navigate(['/content', provider.id])
   }
 }

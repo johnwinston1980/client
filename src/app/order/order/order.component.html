@@ -8,8 +8,11 @@
       </mat-list-item>
  </mat-nav-list>
 
+ <button mat-button color="primary" (click)="open()">Hora de recogida</button>
+ {{pickupTime}}
+
  <mat-form-field>
-    <textarea matInput placeholder="Special instructions"></textarea>
+    <textarea matInput placeholder="Special instructions" [(ngModel)]="remarks"></textarea>
   </mat-form-field>
 
 <button mat-button color="primary" (click)="openDialog()">Place order</button>

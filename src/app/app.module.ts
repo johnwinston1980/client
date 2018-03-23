@@ -33,10 +33,17 @@ import { MenuComponent } from './menu/menu/menu.component'
 
 import { CategoryService } from './category/shared/category.service'
 import { ProductService } from './product/shared/product.service';
+import { OrdersUserService } from './order/shared/orders-user.service'
+
 import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
 import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.component'
 
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { DetailsProviderComponent } from './provider/details-provider/details-provider.component';
+import { ContentProviderComponent } from './provider/content-provider/content-provider.component';
+
+import { AmazingTimePickerModule } from 'amazing-time-picker';
+import { ListOrdersProviderComponent } from './order/list-orders-provider/list-orders-provider.component'
 
 @NgModule({
   declarations: [
@@ -51,7 +58,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ListOrdersComponent,
     MenuComponent,
     LoginDialogComponent,
-    MessageDialogComponent,    
+    MessageDialogComponent,
+    DetailsProviderComponent,
+    ContentProviderComponent,
+    ListOrdersProviderComponent,    
   ],
   imports: [
     BrowserModule,   
@@ -67,10 +77,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFirestoreModule.enablePersistence(),
     BrowserAnimationsModule,
     MaterialModule,
-    FormsModule,    
+    FormsModule,  
+    AmazingTimePickerModule  
   ],
   entryComponents: [ LoginDialogComponent, MessageDialogComponent ],
-  providers: [ BroadcastObjectService, CategoryService, ProductService ],
+  providers: [ BroadcastObjectService, CategoryService, ProductService, OrdersUserService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -8,7 +8,7 @@ import { Upload } from '../../shared/upload'
 
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 
-import { OrderService } from '../../order/shared/order.service'
+//import { OrderService } from '../../order/shared/order.service'
 import { ImagesService } from '../../shared/images.service'
 
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
@@ -19,7 +19,7 @@ import * as _ from 'lodash'
   selector: 'app-list-categories',
   templateUrl: './list-categories.component.html',
   styleUrls: ['./list-categories.component.css'],
-  providers: [ CategoryService, OrderService, ImagesService ]
+  providers: [ CategoryService, ImagesService ]
 })
 
 export class ListCategoriesComponent implements OnInit {
@@ -36,7 +36,7 @@ export class ListCategoriesComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private imagesService: ImagesService,
-    private orderService: OrderService) {
+    ) {
 
     this.providerId = this.route.snapshot.params['provId']    
     this.categoryService.init(this.providerId)

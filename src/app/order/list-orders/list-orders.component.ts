@@ -1,42 +1,40 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
 
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
-/*import { Order } from '../../order/shared/order'
-import { OrderFirestore } from '../../order/shared/order_firestore'
-import { Product } from '../../product/shared/product'*/
-import { OrderService } from '../../order/shared/order.service'
+import { OrdersUserService } from '../../order/shared/orders-user.service'
 
 import { User } from '../../shared/user'
-import { Provider } from '../../provider/shared/provider'
 import * as _ from 'lodash'
 
 @Component({
   selector: 'app-list-orders',
   templateUrl: './list-orders.component.html',
   styleUrls: ['./list-orders.component.css'],
-  providers: [ OrderService ]
+  providers: [OrdersUserService]
 })
 export class ListOrdersComponent implements OnInit {
 
   orders: any
   user: User
-  provider: Provider
 
   constructor(private broadcastObjectService: BroadcastObjectService,
-    private orderService: OrderService) { }
+    private ordersUserService: OrdersUserService,
+    private router: Router) { }
 
   ngOnInit() {
     this.broadcastObjectService.currentUser.subscribe(user => {
       this.user = user;
-      if(!_.isEmpty(this.user)){
-        this.broadcastObjectService.currentProvider.subscribe(provider => {
-          this.provider = provider
-          this.orderService.init(this.provider.id, this.user.uid)
-          this.orderService.getOrders().subscribe(orders => {
-            this.orders = orders
-          })
+      if (!_.isEmpty(this.user)) {
+        this.ordersUserService.init(this.user.uid)
+        this.ordersUserService.getOrdersHistory().subscribe(orders => {
+          this.orders = orders
         })
-      }      
-    })    
+      }
+    })
+  }
+
+  openProvider(order) {
+    this.router.navigate(['/list-orders-provider', order.id])
   }
 }

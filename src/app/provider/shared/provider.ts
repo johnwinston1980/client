@@ -5,5 +5,5 @@ export interface Provider{
   userId?: string;	
   name?: string,
   image?: string
- // address?: Address  
+  //address?: Address  
 }

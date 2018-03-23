@@ -1,0 +1,15 @@
+<mat-tab-group [(selectedIndex)]="selectedTabIndex" (selectedTabChange)="tabChange($event)" class="demo-tab-group">
+
+    <mat-tab label="Menu" >
+      <app-menu></app-menu>         
+    </mat-tab>
+
+    <mat-tab label="Categorias">
+      <app-list-categories></app-list-categories>     
+    </mat-tab>
+  
+    <mat-tab label="Acerca">
+      <app-provider-details></app-provider-details>     
+    </mat-tab>
+  
+  </mat-tab-group>

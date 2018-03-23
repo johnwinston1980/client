@@ -93,11 +93,11 @@ export class MainComponent implements OnInit, AfterViewInit {
     }
   }
 
-
-  goTo(provider) {
+  openProvider(provider) {
     this.broadcastObjectService.broadcastProvider(provider)
     //this.router.navigate(['/list-categories', provider.id])
-    this.router.navigate(['/menu', provider.id])
+    //this.router.navigate(['/menu', provider.id])
+    this.router.navigate(['/content', provider.id])
   }
 
 }

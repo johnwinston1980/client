@@ -9,7 +9,7 @@ import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 import { Order } from '../../order/shared/order'
 import { OrderFirestore } from '../../order/shared/order_firestore'
 import { Product } from '../../product/shared/product'
-import { OrderService } from '../../order/shared/order.service'
+import { OrdersProviderService } from '../../order/shared/orders-provider.service'
 
 import { LoginDialogComponent } from '../../dialogs/login-dialog/login-dialog.component'
 import { MessageDialogComponent } from '../../dialogs/message-dialog/message-dialog.component'
@@ -18,11 +18,13 @@ import { User } from '../../shared/user'
 import { Provider } from '../../provider/shared/provider'
 import * as _ from 'lodash'
 
+import { AmazingTimePickerService } from 'amazing-time-picker'
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css'],
-  providers: [OrderService]
+  providers: [OrdersProviderService]
 })
 
 export class OrderComponent implements OnInit, OnDestroy {
@@ -30,18 +32,15 @@ export class OrderComponent implements OnInit, OnDestroy {
   provider: Provider
   user: User
   order: Order
-  arrayOfKeys: any
-  orderFirestore: OrderFirestore = {}
-
-
-  animal: string;
-  name: string;
-
-  authState: any = null;
+  pickupTime: string
+  remarks: string
+  timeSelected: boolean
+  authState: any = null
 
   constructor(
+    private atp: AmazingTimePickerService,
     private broadcastObjectService: BroadcastObjectService,
-    private orderService: OrderService,
+    private ordersProviderService: OrdersProviderService,
     private afAuth: AngularFireAuth,
     public dialog: MatDialog,
     private router: Router) {
@@ -50,19 +49,18 @@ export class OrderComponent implements OnInit, OnDestroy {
       this.authState = auth
     });
 
+    this.timeSelected = false
+
   }
 
   ngOnInit() {
+
     this.broadcastObjectService.currentUser.subscribe(user => {
       this.user = user;
       if (!_.isEmpty(this.user)) {
         this.broadcastObjectService.currentProvider.subscribe(provider => {
           this.provider = provider
-          this.orderService.init(this.provider.id, this.user.uid)
-
-          //save order
-
-
+          this.ordersProviderService.init(this.provider.id, this.user.uid)
         })
       }
     })
@@ -70,41 +68,55 @@ export class OrderComponent implements OnInit, OnDestroy {
     this.broadcastObjectService.currentOrder.subscribe(order => {
       this.order = order
     })
+
   }
 
   ngOnDestroy() {
-
+    
   }
+
+  
+
+  open() {
+    const amazingTimePicker = this.atp.open();
+    amazingTimePicker.afterClose().subscribe(time => {
+      this.pickupTime = time
+      this.timeSelected = true
+      console.log(time);
+    });
+  }
+
 
   placeOrder() {
-    this.orderFirestore.userId = this.user.uid
-    this.orderFirestore.providerId = this.provider.id
-    this.orderFirestore.providerName = this.provider.name
-    this.orderFirestore.products = this.arrayOfProducts()
-    this.orderFirestore.status = 'pending'
-    this.orderService.addOrder(this.orderFirestore);
-    let dialogRef = this.dialog.open(MessageDialogComponent, {
-      width: '350px',
-      data: { showMessage: 'Su orden ha sido creada!' }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.router.navigate([''])
-    })
+
+    if (!this.timeSelected) {
+      this.open()
+    }
+
+    else {      
+      this.ordersProviderService.addOrder(this.remarks, this.pickupTime, this.user, this.provider, this.order).then(value => {
+
+        console.log('after insert')
+        console.log(value.id)
+
+        //this.broadcastObjectService.broadcastOrder({})
+
+        let dialogRef = this.dialog.open(MessageDialogComponent, {
+          width: '350px',
+          data: { showMessage: 'Su orden ha sido creada!' }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          this.router.navigate([''])
+        })
+
+      }).catch(error => {
+        console.log(error)
+      })
+    }
   }
 
-  arrayOfProducts(): Array<Product> {
-    var array = new Array<Product>()
-    for (var [key, value] of this.order.products.entries()) {
-      //console.log(key + ' = ' + value);
-      //for (var [key2, value2] of this.order.products.get(key.toString()).entries()) {
-      //var product = <Product>value
-      var product = <Product>this.order.products.get(key.toString())
-      array.push(product)
-      //console.log(key2 + ' = ' +  JSON.stringify(product));
-      //}
-    }
-    return array
-  }
+
 
   openDialog(): void {
     if (this.authenticated) {
@@ -113,7 +125,7 @@ export class OrderComponent implements OnInit, OnDestroy {
     else {
       let dialogRef = this.dialog.open(LoginDialogComponent, {
         width: '350px',
-        data: { name: this.name, animal: this.animal }
+        data: { name: '', animal: '' }
       });
       /*dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');

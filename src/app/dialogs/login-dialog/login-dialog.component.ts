@@ -13,9 +13,12 @@ export class LoginDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+
+    @Inject(MAT_DIALOG_DATA) public data: any,    
     private broadcastObjectService: BroadcastObjectService) {
+
     console.log(data)
+    
   }
 
   onNoClick(): void {
