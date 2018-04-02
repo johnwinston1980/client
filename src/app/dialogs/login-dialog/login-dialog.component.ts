@@ -9,11 +9,11 @@ import { BroadcastObjectService } from '../../shared/broadcast-object.service'
   selector: './login-dialog',
   templateUrl: './login-dialog.component.html',
 })
+
 export class LoginDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-
     @Inject(MAT_DIALOG_DATA) public data: any,    
     private broadcastObjectService: BroadcastObjectService) {
 

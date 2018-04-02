@@ -4,12 +4,17 @@ import { ActivatedRoute } from '@angular/router'
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 import { OrdersProviderService } from '../../order/shared/orders-provider.service'
 
+import { MatDialog, MatDialogRef } from '@angular/material';
+
+import { OrderDialogComponent } from '../../dialogs/order-dialog/order-dialog.component'
+
 @Component({
   selector: 'app-list-orders-provider',
   templateUrl: './list-orders-provider.component.html',
   styleUrls: ['./list-orders-provider.component.css'],
-  providers: [ OrdersProviderService ]
+  providers: [OrdersProviderService]
 })
+
 export class ListOrdersProviderComponent implements OnInit {
 
   orders: any
@@ -18,7 +23,8 @@ export class ListOrdersProviderComponent implements OnInit {
   constructor(
     private ordersProviderService: OrdersProviderService,
     private broadcastObjectService: BroadcastObjectService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
 
     this.providerId = route.snapshot.params['provId']
 
@@ -32,4 +38,21 @@ export class ListOrdersProviderComponent implements OnInit {
       })
     })
   }
+
+
+  openDialog(order): void {
+
+    let dialogRef = this.dialog.open(OrderDialogComponent, {
+      width: '200px',
+      height: '200px',
+      data: { id: order.id }
+    });
+    
+    /*dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });*/
+  }
+
+
 }

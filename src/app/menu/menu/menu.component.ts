@@ -14,9 +14,9 @@ import { MenuItem } from '../shared/menu-item'
 
 import { Category } from '../../category/shared/category'
 
-import { Order } from '../../order/shared/order'
-
 import * as _ from 'lodash'
+
+import { Order } from '../../shared/order'
 
 @Component({
   selector: 'app-menu',
@@ -34,7 +34,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 
   menu: Array<MenuItem>
-  order: Order = {}
   favoriteSeason: any
   checked: boolean
   disable: boolean
@@ -55,10 +54,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
-    this.order.products = new TSMap<string, any>()
-    this.broadcastObjectService.broadcastOrder(this.order)
-
 
     this.currentMenu.subscribe(menu => {
       this.menu = menu
@@ -89,8 +84,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 
 
   showCheckBox(product) {
+    this.checked = Order.UserOrder.getInstance().isSelected(product)
+    return true
     //not selected category
-    if (_.isEmpty(this.order.products.get(product.categoryId))) {
+    /*if (_.isEmpty(this.order.products.get(product.categoryId))) {
       this.checked = false
       return true
     }
@@ -102,14 +99,18 @@ export class MenuComponent implements OnInit, OnDestroy {
       return true
     }
     this.checked = false
-    return false
+    return false*/
   }
 
-  onSelectionChange(product, e) {
-    /*
-     if(e.target.checked) { }
-    */
-    console.log('aqui')
+  selected(e, product) {
+    if (e.checked) {      
+      Order.UserOrder.getInstance().addProduct(product)          
+    }
+    else{      
+      Order.UserOrder.getInstance().removeProduct(product)      
+    }
+    this.broadcastObjectService.updateTotal()
+    /*console.log('aqui')
     if (_.isEmpty(this.order.products.get(product.categoryId))) {
       this.order.products.set(product.categoryId, product)
       if (this.menu.length == this.order.products.keys().length) {
@@ -126,11 +127,6 @@ export class MenuComponent implements OnInit, OnDestroy {
     else {
       this.order.products.delete(product.categoryId)
       this.disable = true
-    }
+    }*/
   }
-
-  saveOrder() {
-    this.router.navigate(['orders'])
-  }
-
 }

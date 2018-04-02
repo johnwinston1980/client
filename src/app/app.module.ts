@@ -14,6 +14,8 @@ import { environment } from '../environments/environment.prod';
 export const firebaseConfig = environment.firebaseConfig;
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
+import { Order } from '../app/shared/order'
+
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main/main.component';
@@ -43,7 +45,14 @@ import { DetailsProviderComponent } from './provider/details-provider/details-pr
 import { ContentProviderComponent } from './provider/content-provider/content-provider.component';
 
 import { AmazingTimePickerModule } from 'amazing-time-picker';
-import { ListOrdersProviderComponent } from './order/list-orders-provider/list-orders-provider.component'
+import { ListOrdersProviderComponent } from './order/list-orders-provider/list-orders-provider.component';
+import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component'
+
+import { QRCodeModule } from 'ng-qrcode';
+
+import { HttpClientModule } from '@angular/common/http';
+import { StarService } from './shared/star.service';
+
 
 @NgModule({
   declarations: [
@@ -62,6 +71,7 @@ import { ListOrdersProviderComponent } from './order/list-orders-provider/list-o
     DetailsProviderComponent,
     ContentProviderComponent,
     ListOrdersProviderComponent,    
+    OrderDialogComponent,    
   ],
   imports: [
     BrowserModule,   
@@ -78,10 +88,12 @@ import { ListOrdersProviderComponent } from './order/list-orders-provider/list-o
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,  
-    AmazingTimePickerModule  
+    AmazingTimePickerModule,
+    QRCodeModule,
+    HttpClientModule  
   ],
-  entryComponents: [ LoginDialogComponent, MessageDialogComponent ],
-  providers: [ BroadcastObjectService, CategoryService, ProductService, OrdersUserService ],
+  entryComponents: [ LoginDialogComponent, MessageDialogComponent, OrderDialogComponent ],
+  providers: [ BroadcastObjectService, CategoryService, ProductService, OrdersUserService, StarService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

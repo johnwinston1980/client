@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, NgZone } from '@angular/core';
 
 import { MatTab, MatCard } from '@angular/material'
 
@@ -11,9 +11,13 @@ import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 
+import { GoogleMapsService } from '../../shared/google-maps.service'
+
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 
 import { User } from '../../shared/user'
+
+import * as _ from 'lodash'
 
 //import { openApp } from 'nativescript-open-app'
 
@@ -22,7 +26,7 @@ import { User } from '../../shared/user'
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  providers: [ProviderService]
+  providers: [ProviderService, GoogleMapsService]
 })
 
 
@@ -30,6 +34,9 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   @ViewChild("infoWindow", { read: ElementRef })
   infoWindow: ElementRef;
+
+  /*@ViewChild("gm", { read: ElementRef })
+  gm: ElementRef;*/
 
   public latitude: number;
   public longitude: number;
@@ -43,12 +50,19 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   user: User
 
+  locationSet: boolean
+
   constructor(
     private providerService: ProviderService,
     private broadcastObjectService: BroadcastObjectService,
     private router: Router,
-    private afAuth: AngularFireAuth) {
+    private afAuth: AngularFireAuth,
+    private googleMaps: GoogleMapsService,
+    private _zone: NgZone) {
+
     this.userAuthState = afAuth.authState
+    this.locationSet = false
+
   }
 
   ngAfterViewInit(): void {
@@ -56,10 +70,16 @@ export class MainComponent implements OnInit, AfterViewInit {
     //this.infoWindow.nativeElement.
 
     //console.log(this.infoWindow.nativeElement.open());
-}
+  }
 
 
-  ngOnInit() {
+  ngOnInit() {    
+
+    if (!_.isEmpty(localStorage.getItem('position'))) {      
+      this.latitude = parseFloat(localStorage.getItem('lat'))
+      this.longitude = parseFloat(localStorage.getItem('lng'))
+      this.zoom = 11;
+    }    
 
     this.broadcastObjectService.currentUser.subscribe(user => {
       this.user = user
@@ -67,17 +87,20 @@ export class MainComponent implements OnInit, AfterViewInit {
 
     this.providerService.getProviders().subscribe(providers => {
       this.providers = providers
+      this.setCurrentPosition()
     })
-
-    //set google maps defaults
-    this.zoom = 8;
-    this.latitude = 39.8282;
-    this.longitude = -98.5795;
-
-    this.setCurrentPosition();
-
   }
 
+  getDistance(providers: Provider[]) {
+    console.log('get distance')
+    for (let provider of providers) {
+      this.googleMaps.getDistance(String(this.latitude), String(this.longitude), String(provider.address.lat), String(provider.address.lng)).subscribe(data => {
+        var json = JSON.parse(data.toString())
+        console.log(json.rows[0].elements[0].distance.text)
+        provider.distance = json.rows[0].elements[0].distance.text
+      })
+    }
+  }
 
   /*open(){
     openApp("fb://");
@@ -86,10 +109,22 @@ export class MainComponent implements OnInit, AfterViewInit {
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        console.log('position only now')
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
+        localStorage.setItem('lat', String(this.latitude))
+        localStorage.setItem('lng', String(this.longitude))
+        localStorage.setItem('position', 'true')
         this.zoom = 11;
+        // this.getDistance(this.providers)
       });
+    }
+    else {
+      //set google maps defaults
+      console.log('position defaults')
+      this.zoom = 8
+      this.latitude = 39.8282
+      this.longitude = -98.5795
     }
   }
 
@@ -99,5 +134,4 @@ export class MainComponent implements OnInit, AfterViewInit {
     //this.router.navigate(['/menu', provider.id])
     this.router.navigate(['/content', provider.id])
   }
-
 }

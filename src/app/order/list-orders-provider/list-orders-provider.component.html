@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let order of orders">
+  <mat-list-item *ngFor="let order of orders" (click)=openDialog(order)>
     <!--<img matListAvatar src="{{product.image}}">-->
     <h4 matLine>{{order.providerName}}</h4>
     <p matLine class="demo-2"> {{order.status}} </p>

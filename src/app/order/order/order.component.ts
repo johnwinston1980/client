@@ -6,7 +6,6 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
-import { Order } from '../../order/shared/order'
 import { OrderFirestore } from '../../order/shared/order_firestore'
 import { Product } from '../../product/shared/product'
 import { OrdersProviderService } from '../../order/shared/orders-provider.service'
@@ -19,6 +18,9 @@ import { Provider } from '../../provider/shared/provider'
 import * as _ from 'lodash'
 
 import { AmazingTimePickerService } from 'amazing-time-picker'
+import { TSMap } from "typescript-map"
+
+import { Order } from '../../shared/order'
 
 @Component({
   selector: 'app-order',
@@ -29,9 +31,9 @@ import { AmazingTimePickerService } from 'amazing-time-picker'
 
 export class OrderComponent implements OnInit, OnDestroy {
 
+  products: TSMap<string, Product>
   provider: Provider
   user: User
-  order: Order
   pickupTime: string
   remarks: string
   timeSelected: boolean
@@ -50,10 +52,12 @@ export class OrderComponent implements OnInit, OnDestroy {
     });
 
     this.timeSelected = false
-
+    this.remarks = ''
   }
 
   ngOnInit() {
+
+    this.products = Order.UserOrder.getInstance().getProducts()
 
     this.broadcastObjectService.currentUser.subscribe(user => {
       this.user = user;
@@ -65,17 +69,12 @@ export class OrderComponent implements OnInit, OnDestroy {
       }
     })
 
-    this.broadcastObjectService.currentOrder.subscribe(order => {
-      this.order = order
-    })
-
   }
 
   ngOnDestroy() {
-    
+
   }
 
-  
 
   open() {
     const amazingTimePicker = this.atp.open();
@@ -93,13 +92,17 @@ export class OrderComponent implements OnInit, OnDestroy {
       this.open()
     }
 
-    else {      
-      this.ordersProviderService.addOrder(this.remarks, this.pickupTime, this.user, this.provider, this.order).then(value => {
+    else {
+      this.ordersProviderService.addOrder(this.remarks, this.pickupTime, this.user, this.provider).then(value => {
 
-        console.log('after insert')
-        console.log(value.id)
+        /*console.log('after insert')
+        console.log(value.id)*/
 
-        //this.broadcastObjectService.broadcastOrder({})
+        //clear all
+        Order.UserOrder.getInstance().setProviderId(null)
+        Order.UserOrder.getInstance().emptyProductList()
+        this.broadcastObjectService.updateTotal()
+
 
         let dialogRef = this.dialog.open(MessageDialogComponent, {
           width: '350px',

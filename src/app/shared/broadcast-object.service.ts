@@ -3,20 +3,21 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 import { Provider } from '../provider/shared/provider'
 import { Product } from '../product/shared/product'
-import { Order } from '../order/shared/order'
 import { User } from '../shared/user'
+
+import { Order } from '../shared/order'
 
 @Injectable()
 export class BroadcastObjectService {
 
   provider: Provider = {}
-  product: Product = {}  
-  order: Order = {}
+  product: Product = {}
   user: User = {}
   action: string = ""
-  
+  total: number = 0
 
-  private actionSource = new BehaviorSubject<String>(this.action)
+
+  private actionSource = new BehaviorSubject<string>(this.action)
   currentAction = this.actionSource.asObservable()
 
   private providerSource = new BehaviorSubject<Provider>(this.provider)
@@ -25,11 +26,11 @@ export class BroadcastObjectService {
   private productSource = new BehaviorSubject<Product>(this.product)
   currentProduct = this.productSource.asObservable()
 
-  private orderSource = new BehaviorSubject<Order>(this.order)
-  currentOrder = this.orderSource.asObservable()
-
   private userSource = new BehaviorSubject<User>(this.user)
   currentUser = this.userSource.asObservable()
+
+  private totalSource = new BehaviorSubject<number>(this.total)
+  currentTotal = this.totalSource.asObservable()
 
   constructor() { }
 
@@ -37,7 +38,7 @@ export class BroadcastObjectService {
     this.providerSource.next(provider)
   }
 
-  broadcastAction(action: String) {
+  broadcastAction(action: string) {
     this.actionSource.next(action)
   }
 
@@ -45,11 +46,18 @@ export class BroadcastObjectService {
     this.productSource.next(product)
   }
 
-  broadcastOrder(order: Order) {
-    this.orderSource.next(order)
-  }
-
   broadcastUser(user: User) {
     this.userSource.next(user)
+  }  
+
+  updateTotal() {
+    this.total = 0
+    var products = Order.UserOrder.getInstance().getProducts()
+    //var array = new Array<Product>()
+    for (var [key, value] of products.entries()) {
+      var product = <Product>value
+      this.total += product.price
+    }
+    this.totalSource.next(this.total)
   }
 }

@@ -11,6 +11,7 @@ import { DocumentReference } from '@firebase/firestore-types';
 import { OrdersUserService } from './orders-user.service'
 
 import { Product } from '../../product/shared/product'
+import { Order } from '../../shared/order'
 
 @Injectable()
 export class OrdersProviderService {
@@ -53,9 +54,9 @@ export class OrdersProviderService {
     return this.orderDoc;
   }
 
-  addOrder(remarks, pickupTime, user, provider, localOrder): Promise<DocumentReference> {
+  addOrder(remarks, pickupTime, user, provider): Promise<DocumentReference> {
 
-    let order = this.setUpOrder(remarks, pickupTime, user, provider, localOrder)
+    let order = this.setUpOrder(remarks, pickupTime, user, provider)
 
     return new Promise((resolve, reject) => {
       this.ordersCollection.add(order).then(value => {
@@ -78,7 +79,7 @@ export class OrdersProviderService {
 
   }
 
-  setUpOrder(remarks, pickupTime, user, provider, localOrder): OrderFirestore {
+  setUpOrder(remarks, pickupTime, user, provider): OrderFirestore {
 
     let orderFirestore: OrderFirestore = {
       userId: user.uid,
@@ -87,7 +88,7 @@ export class OrdersProviderService {
       pickupTime: pickupTime,
       createdDate: new Date(),
       remarks: remarks,
-      products: this.arrayOfProducts(localOrder),
+      products: this.arrayOfProducts(),
       status: 'pending'
     }
 
@@ -96,10 +97,11 @@ export class OrdersProviderService {
   }
 
 
-  arrayOfProducts(order): Array<Product> {
+  arrayOfProducts(): Array<Product> {
+    var products = Order.UserOrder.getInstance().getProducts()
     var array = new Array<Product>()
-    for (var [key, value] of order.products.entries()) {
-      var product = <Product>order.products.get(key.toString())
+    for (var [key, value] of products.entries()) {
+      var product = <Product>value
       array.push(product)
     }
     return array

@@ -13,7 +13,7 @@ import { User } from '../app/shared/user'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   title = 'app';
   user: User
@@ -25,17 +25,19 @@ export class AppComponent implements OnInit{
   @ViewChild("drawer")
   public drawer: MatDrawer;
 
-  someMethod(event) {  
-    if(event == 'close'){
+  someMethod(event) {
+    console.log('event = ' + event)
+    if (event == 'close') {
       this.drawer.close()
     }
-    else
-      this.drawer.toggle()    
+    else if (event == 'toggle') {
+      this.drawer.toggle()
+    }
   }
 
-  orders(){
+  orders() {
     this.router.navigate(['/list-orders']);
-    this.drawer.close()  
+    this.drawer.close()
   }
 
   constructor(private broadcastObjectService: BroadcastObjectService,
@@ -44,10 +46,10 @@ export class AppComponent implements OnInit{
     this.userAuthState = afAuth.authState
   }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.broadcastObjectService.currentUser.subscribe(user => {
       this.user = user;
-    })   
+    })
 
     var savedUser = JSON.parse(localStorage.getItem('user'))
     if (!_.isEmpty(savedUser)) {
@@ -67,7 +69,7 @@ export class AppComponent implements OnInit{
       this.user.displayName = success.user.displayName
       this.user.photoURL = success.user.providerData[0].photoURL
 
-      
+
       localStorage.setItem('user', JSON.stringify(this.user));
       this.broadcastObjectService.broadcastUser(this.user);
     }
@@ -88,9 +90,9 @@ export class AppComponent implements OnInit{
 
   private socialSignIn(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
-      .then((credential) =>  {
-          this.authState = credential.user
-          //this.updateUserData()
+      .then((credential) => {
+        this.authState = credential.user
+        //this.updateUserData()
       })
       .catch(error => console.log(error));
   }

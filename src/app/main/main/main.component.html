@@ -1,24 +1,27 @@
-<mat-tab-group class="demo-tab-group">
+<div class="main_layout">
 
-  <mat-tab label="Mapa">
-    <agm-map #gm [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-        <agm-marker [latitude]="latitude" [longitude]="longitude" >
-            <agm-info-window #infoWindow>
-                <h3>You are here!</h3>                
-              </agm-info-window>
-        </agm-marker>
+  <div>
+    <agm-map #gm [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" gestureHandling="greedy">
+      <agm-marker [latitude]="latitude" [longitude]="longitude">
+        <agm-info-window #infoWindow>
+          <h3>You are here!</h3>
+        </agm-info-window>
+      </agm-marker>
       <agm-marker *ngFor="let provider of providers" [latitude]="provider.address.lat" [longitude]="provider.address.lng">
         <agm-info-window>
+          <img src="{{provider.image}}" width="50px" height="50px">
           <h3>{{provider.name}}</h3>
           <p>{{provider.address.formatted_address}}</p>
+          <!--<p>{{provider.distance}}</p>-->
           <button mat-button color="primary" (click)="openProvider(provider)">Mostrar</button>
         </agm-info-window>
       </agm-marker>
-    </agm-map>    
-  </mat-tab>
+    </agm-map>
+  </div>
 
-  <mat-tab label="Tiendas">
+  <div>
     <app-list-providers></app-list-providers>
-  </mat-tab>
+  </div>
 
-</mat-tab-group>
+
+</div>

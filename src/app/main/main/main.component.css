@@ -1,6 +1,13 @@
 agm-map {
-    height: 100vh;
+    height: 300px;
   }
+
+  .main_layout{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
 
   .example-container {
     position: absolute;

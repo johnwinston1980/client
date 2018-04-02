@@ -6,6 +6,6 @@ export interface Product {
     categoryName?: string,
     providerId?: string,
     categoryId?: string,  
-    isSelected?: boolean   
+    //isSelected?: boolean   
     image?: string    
   }

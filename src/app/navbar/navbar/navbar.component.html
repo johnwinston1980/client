@@ -1,14 +1,15 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <mat-icon (click)="toggle()">menu</mat-icon>
-    <button mat-button (click)="home()">Inicio 1</button>
+    <button mat-button *ngIf="visible" (click)="goBack()">Go back</button>
+    <button mat-button *ngIf="visible" (click)="home()">Inicio</button>
 
-    <span class="example-spacer"></span>  
+    <span class="example-spacer"></span>
 
 
-    <mat-icon  class="example-icon">add_shopping_cart</mat-icon>    
-    <p>
-       {{order.products.size()}}
-    </p>
+    <p *ngIf="total > 0">{{total}} USD </p>
+
+    <mat-icon (click)="saveOrder()" class="example-icon">add_shopping_cart</mat-icon>
+
   </mat-toolbar-row>
 </mat-toolbar>

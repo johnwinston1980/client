@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'
 
 import { CategoryService } from '../shared/category.service'
-import { Order } from '../../order/shared/order'
 
 import { Upload } from '../../shared/upload'
 
@@ -26,7 +25,6 @@ export class ListCategoriesComponent implements OnInit {
 
   providerId: any
   categories: any
-  order: Order
   image: Upload
   doc: AngularFirestoreDocument<Upload>
   images: Array<Upload>
@@ -45,10 +43,7 @@ export class ListCategoriesComponent implements OnInit {
   ngOnInit() {
     this.categoryService.getCategories().subscribe(categories => {
       this.categories = categories
-    })   
-    this.broadcastObjectService.currentOrder.subscribe(order => {
-      this.order = order
-    }) 
+    })     
   }
 
   showProducts(id) {
@@ -56,7 +51,7 @@ export class ListCategoriesComponent implements OnInit {
   }
 
   isSelected(categoryId): boolean{
-    return !_.isEmpty(this.order.products.get(categoryId))                   
+    return false //!_.isEmpty(this.order.products.get(categoryId))                   
   }
   
 

@@ -5,7 +5,6 @@ import { ProductService } from '../shared/product.service'
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 
 import { Product } from '../shared/product'
-import { Order } from '../../order/shared/order'
 import { TSMap } from "typescript-map"
 
 import * as _ from 'lodash'
@@ -23,8 +22,7 @@ export class ListProductsComponent implements OnInit {
   images: any;
   providerId: string
   categoryId: string
-  order: Order;
-
+  
   constructor(private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
@@ -35,12 +33,11 @@ export class ListProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.broadcastObjectService.currentOrder.subscribe(order => {
-      this.order = order
-      this.productService.getProducts().subscribe(products => {
-        this.products = products
-      })
+
+    this.productService.getProducts().subscribe(products => {
+      this.products = products
     })
+
   }
 
   showDetails(product: Product) {

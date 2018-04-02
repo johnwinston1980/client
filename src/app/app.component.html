@@ -1,5 +1,5 @@
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-drawer #drawer class="example-sidenav" mode="side" opened=false>
         
         <div *ngIf="(userAuthState | async)">
             <img src="{{user.photoURL}}" width="60px" height="60px">
