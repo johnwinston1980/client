@@ -8,8 +8,8 @@
       "updateMode": "prefetch",
       "urls": [
         "https://johnwinston1980.github.io/client/index.html",
-        "https://johnwinston1980.github.io/client/inline.757237670aafd6d8783f.bundle.js",
-        "https://johnwinston1980.github.io/client/main.5d071ccc7479cdcf6add.bundle.js",
+        "https://johnwinston1980.github.io/client/inline.360d15d83159f109d355.bundle.js",
+        "https://johnwinston1980.github.io/client/main.0948ff80a1eb6c9e8ab6.bundle.js",
         "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js",
         "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css"
       ],
@@ -53,13 +53,13 @@
     }
   ],
   "hashTable": {
-    "https://johnwinston1980.github.io/client/inline.757237670aafd6d8783f.bundle.js": "5291cd613f91ecefeb514b252bc9efb0f893690c",
+    "https://johnwinston1980.github.io/client/inline.360d15d83159f109d355.bundle.js": "658189a7304adb050376c7a7c123a29e1bedc6fc",
     "https://johnwinston1980.github.io/client/assets/512x512.jpg": "1e5f07c1ee882f0e033ce63793984623aee4affa",
-    "https://johnwinston1980.github.io/client/main.5d071ccc7479cdcf6add.bundle.js": "82dec71bc927f5549cc79a4c0ca716f340cba59e",
+    "https://johnwinston1980.github.io/client/main.0948ff80a1eb6c9e8ab6.bundle.js": "1bf9ebdca376d8d05a14f398855f8ec55e2f2f55",
     "https://johnwinston1980.github.io/client/assets/facebook.png": "768a4f926c1d4a8ed301d5882accaffa652673bf",
     "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js": "c6df6b403364a6a888434d069ed8f0bfb8ef3655",
     "https://johnwinston1980.github.io/client/assets/google_sign_in.png": "4ff596830b85f5c343130d5c89ae5d0b0995581a",
     "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css": "14d48667df83327375e542f3d7206432b21af1c2",
-    "https://johnwinston1980.github.io/client/index.html": "3aaa89da3badf5e90cfc3ae9a8fb388f7064192b"
+    "https://johnwinston1980.github.io/client/index.html": "54e97e8f5f8bdb62a7dc2aa46222448d39eaa31b"
   }
 }
