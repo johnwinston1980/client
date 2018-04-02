@@ -73,13 +73,13 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
 
-  ngOnInit() {    
+  ngOnInit() {
 
-    if (!_.isEmpty(localStorage.getItem('position'))) {      
+    if (!_.isEmpty(localStorage.getItem('position'))) {
       this.latitude = parseFloat(localStorage.getItem('lat'))
       this.longitude = parseFloat(localStorage.getItem('lng'))
       this.zoom = 11;
-    }    
+    }
 
     this.broadcastObjectService.currentUser.subscribe(user => {
       this.user = user
@@ -106,6 +106,7 @@ export class MainComponent implements OnInit, AfterViewInit {
     openApp("fb://");
   }*/
 
+  //we still need to work here
   private setCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -117,14 +118,26 @@ export class MainComponent implements OnInit, AfterViewInit {
         localStorage.setItem('position', 'true')
         this.zoom = 11;
         // this.getDistance(this.providers)
+      }, (error) => {
+        console.log(error.code + ' ' + error.message)
+        if (!_.isEmpty(localStorage.getItem('position'))) {
+          this.latitude = parseFloat(localStorage.getItem('lat'))
+          this.longitude = parseFloat(localStorage.getItem('lng'))
+          this.zoom = 11;
+        }
+        else {
+          this.latitude = 39.8282
+          this.longitude = -98.5795
+          this.zoom = 8
+        }
       });
     }
     else {
       //set google maps defaults
-      console.log('position defaults')
-      this.zoom = 8
+      console.log('position defaults')      
       this.latitude = 39.8282
       this.longitude = -98.5795
+      this.zoom = 8
     }
   }
 
