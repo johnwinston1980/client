@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'make-payment',
   templateUrl: './make-payment.component.html',
-  styleUrls: ['./make-payment.component.scss']
+  styleUrls: ['./make-payment.component.css']
 })
 export class MakePaymentComponent implements OnInit {
 
