@@ -1,45 +1,123 @@
-<h1>{{provider.name}}</h1>
-<p>{{provider.address.formatted_address}}</p>
-<img src="{{provider.image}}" width="300px" height="200px">
 
-<h3>Average Rating</h3>
+    <div class="provider_container">
 
-{{ avgRating | async }}
+        <div class="provider_pic">
+            <img src="{{provider.image}}" width="130px">
+        </div>
 
+        <div class="provider_info">
+            <h4>{{provider.name}}</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                magna aliqua. </p>
+        </div>
 
-<h3>Reviews</h3>
-<div *ngFor="let star of stars | async">
+        <div class="provider_rating">
+                <h1>{{ avgRating | async }}</h1>
+                </div>
 
-    <div>
-        <img src="{{star.userProfilePic}}" width="60px" height="60px">
-        <label>{{ star.userDisplayName }}</label>
-        <h1>{{ star.value }} stars </h1>
-        <p>{{ star.remarks }}</p>
-        <p> {{formatDate(star.postedDate)}} </p>
     </div>
 
+   
+
+
+    <div class="review_container" *ngFor="let star of stars | async">
+
+
+        <div class="user_pic">
+            <img src="{{star.userProfilePic}}" width="110px">
+        </div>
+
+        <div class="review_info" style="background-color: white;">
+            <h4>{{ star.userDisplayName }}</h4>
+            <label>{{formatDate(star.postedDate)}}</label>
+            <p>{{ star.value }} stars</p>
+        </div>
+
+        <div class="review_content" style="background-color: #f0fbd8;">
+            <p>{{ star.remarks }}</p>
+        </div>
+
+
+        <!--<div class="review_picture">
+            <img src="{{star.userProfilePic}}" width="100px" height="100px">
+        </div>
+        <div class="review_content">
+            <h4>{{ star.userDisplayName }}</h4>
+            <label>{{formatDate(star.postedDate)}}</label>
+            <p>{{ star.value }}</p>
+            <p>{{ star.remarks }}</p>
+        </div>-->
+
+
+    </div>
+
+    <div>
+        <h3>Post your Review</h3>
+        <fieldset class="rating">
+            <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
+                <!-- full star -->
+                <input (click)="starHandler(num)" [id]="'star'+num" [value]="num-0.5" name="rating" type="radio" />
+                <label class="full" [for]="'star'+num"></label>
+                <!-- half star -->
+                <input (click)="starHandler(num-0.5)" [value]="num-0.5" [id]="'halfstar'+num" name="rating" type="radio" />
+                <label class="half" [for]="'halfstar'+num"></label>
+            </ng-container>
+        </fieldset>
+        <mat-form-field>
+            <textarea matInput placeholder="Deja un comentario" [(ngModel)]="remarks"></textarea>
+        </mat-form-field>
+    </div>
+    <!--<button mat-button color="primary" (click)="openDialog()">Place order</button>-->
+
+
+
+<!--
+    <div class="container">
+    <div class="header">
+        <div class="main">
+            <div>
+                <img src="{{provider.image}}" width="160px" height="120px">
+            </div>
+            <div>
+                <h3> {{provider.name}} </h3>
+                <label> {{provider.address.formatted_address}} </label>
+            </div>
+        </div>
+        <div class="ratings_info">
+            <h1> {{ avgRating | async }} </h1>
+            <label> La Caribena </label>
+            <label> La Caribena </label>
+        </div>
+    </div>
+
+
+    <div class="reviews" *ngFor="let star of stars | async">
+        <div class="review_picture">
+            <img src="{{star.userProfilePic}}" width="100px" height="100px">
+        </div>
+        <div class="review_content">
+            <h4>{{ star.userDisplayName }}</h4>
+            <label>{{formatDate(star.postedDate)}}</label>
+            <p>{{ star.remarks }}</p>
+        </div>
+    </div>
+
+    <div>
+        <h3>Post your Review</h3>
+        <fieldset class="rating">
+            <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
+                
+                <input (click)="starHandler(num)" [id]="'star'+num" [value]="num-0.5" name="rating" type="radio" />
+                <label class="full" [for]="'star'+num"></label>
+                
+                <input (click)="starHandler(num-0.5)" [value]="num-0.5" [id]="'halfstar'+num" name="rating" type="radio" />
+                <label class="half" [for]="'halfstar'+num"></label>
+            </ng-container>
+        </fieldset>
+        <mat-form-field>
+            <textarea matInput placeholder="Deja un comentario" [(ngModel)]="remarks"></textarea>
+        </mat-form-field>
+    </div>
+   
 </div>
-
-
-<h3>Post your Review</h3>
-
-<fieldset class="rating">
-    <ng-container *ngFor="let num of [5, 4, 3, 2, 1]">
-        <!-- full star -->
-        <input (click)="starHandler(num)" [id]="'star'+num" [value]="num-0.5" name="rating" type="radio" />
-
-        <label class="full" [for]="'star'+num"></label>
-
-        <!-- half star -->
-        <input (click)="starHandler(num-0.5)" [value]="num-0.5" [id]="'halfstar'+num" name="rating" type="radio" />
-
-        <label class="half" [for]="'halfstar'+num"></label>
-
-    </ng-container>
-</fieldset>
-
-<mat-form-field>
-    <textarea matInput placeholder="Deja un comentario" [(ngModel)]="remarks"></textarea>
-</mat-form-field>
-
-<!--<button mat-button color="primary" (click)="openDialog()">Place order</button>-->
+-->

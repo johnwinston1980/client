@@ -33,6 +33,7 @@
     "nativescript-open-app": "^0.2.0",
     "ng-qrcode": "^1.1.2",
     "rxjs": "^5.5.2",
+    "stripe": "^5.8.0",
     "typescript-map": "0.0.5",
     "zone.js": "^0.8.14"
   },

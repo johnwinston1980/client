@@ -43,8 +43,8 @@ export class ListOrdersProviderComponent implements OnInit {
   openDialog(order): void {
 
     let dialogRef = this.dialog.open(OrderDialogComponent, {
-      width: '200px',
-      height: '200px',
+      width: '300px',
+      height: '600px',
       data: { id: order.id }
     });
     

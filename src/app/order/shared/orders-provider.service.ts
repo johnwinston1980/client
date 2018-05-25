@@ -54,9 +54,9 @@ export class OrdersProviderService {
     return this.orderDoc;
   }
 
-  addOrder(remarks, pickupTime, user, provider): Promise<DocumentReference> {
+  addOrder(remarks, pickupTime, user, provider, paid): Promise<DocumentReference> {
 
-    let order = this.setUpOrder(remarks, pickupTime, user, provider)
+    let order = this.setUpOrder(remarks, pickupTime, user, provider, paid)
 
     return new Promise((resolve, reject) => {
       this.ordersCollection.add(order).then(value => {
@@ -79,7 +79,7 @@ export class OrdersProviderService {
 
   }
 
-  setUpOrder(remarks, pickupTime, user, provider): OrderFirestore {
+  setUpOrder(remarks, pickupTime, user, provider, paid): OrderFirestore {
 
     let orderFirestore: OrderFirestore = {
       userId: user.uid,
@@ -89,7 +89,8 @@ export class OrdersProviderService {
       createdDate: new Date(),
       remarks: remarks,
       products: this.arrayOfProducts(),
-      status: 'pending'
+      status: 'pending',
+      paid: paid
     }
 
     return orderFirestore

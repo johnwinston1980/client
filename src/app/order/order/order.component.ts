@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Inject, OnDestroy, HostListener } from '@angular/core'
+
+import { PaymentService } from '../../payment/shared/payment.service'
+
+import { environment } from '../../../environments/environment'
+
 import { Router } from '@angular/router'
-
-import { MatDialog, MatDialogRef } from '@angular/material';
-
-import { AngularFireAuth } from 'angularfire2/auth';
+import { MatDialog, MatDialogRef } from '@angular/material'
+import { AngularFireAuth } from 'angularfire2/auth'
 
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
 import { OrderFirestore } from '../../order/shared/order_firestore'
@@ -26,7 +29,7 @@ import { Order } from '../../shared/order'
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css'],
-  providers: [OrdersProviderService]
+  providers: [OrdersProviderService, PaymentService]
 })
 
 export class OrderComponent implements OnInit, OnDestroy {
@@ -39,13 +42,17 @@ export class OrderComponent implements OnInit, OnDestroy {
   timeSelected: boolean
   authState: any = null
 
+  handler: any;
+  amount = 500;
+
   constructor(
     private atp: AmazingTimePickerService,
     private broadcastObjectService: BroadcastObjectService,
     private ordersProviderService: OrdersProviderService,
     private afAuth: AngularFireAuth,
     public dialog: MatDialog,
-    private router: Router) {
+    private router: Router,
+    private paymentSvc: PaymentService) {
 
     this.afAuth.authState.subscribe((auth) => {
       this.authState = auth
@@ -69,10 +76,28 @@ export class OrderComponent implements OnInit, OnDestroy {
       }
     })
 
+    this.handler = StripeCheckout.configure({
+      key: environment.stripeKey,
+      image: this.provider.image,
+      locale: 'auto',
+      token: token => {
+        this.paymentSvc.processPayment(token, this.amount).then(res => {
+          this.createOrder(true)
+        })
+      },
+      opened: function () {
+        console.log("Form opened");
+      },
+      closed: function () {
+        console.log("Form closed");
+      }
+    });
+
   }
 
-  ngOnDestroy() {
 
+  ngOnDestroy() {
+    
   }
 
 
@@ -85,45 +110,69 @@ export class OrderComponent implements OnInit, OnDestroy {
     });
   }
 
+  handlePayment() {
+    this.handler.open({
+      name: this.provider.name,
+      excerpt: 'Deposit Funds to Account',
+      amount: this.amount
+    });
+  }
+
+  @HostListener('window:popstate')
+  onPopstate() {
+    this.handler.close()
+  }
+
 
   placeOrder() {
+    
+  }
 
+  payAtPickUp() {
     if (!this.timeSelected) {
       this.open()
     }
-
     else {
-      this.ordersProviderService.addOrder(this.remarks, this.pickupTime, this.user, this.provider).then(value => {
+      this.createOrder(false)
+    }    
+  }
 
-        /*console.log('after insert')
-        console.log(value.id)*/
-
-        //clear all
-        Order.UserOrder.getInstance().setProviderId(null)
-        Order.UserOrder.getInstance().emptyProductList()
-        this.broadcastObjectService.updateTotal()
-
-
-        let dialogRef = this.dialog.open(MessageDialogComponent, {
-          width: '350px',
-          data: { showMessage: 'Su orden ha sido creada!' }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          this.router.navigate([''])
-        })
-
-      }).catch(error => {
-        console.log(error)
-      })
+  reserveAndPay() {
+    if (!this.timeSelected) {
+      this.open()
     }
+    else {
+      this.handlePayment()
+    } 
+  }
+
+  createOrder(paid) {
+    this.ordersProviderService.addOrder(this.remarks, this.pickupTime, this.user, this.provider, paid).then(value => {     
+
+      //clear all
+      Order.UserOrder.getInstance().setProviderId(null)
+      Order.UserOrder.getInstance().emptyProductList()
+      this.broadcastObjectService.updateTotal()
+
+      let dialogRef = this.dialog.open(MessageDialogComponent, {
+        width: '350px',
+        data: { showMessage: paid == true ? 'Creada y paga' : 'Pagar al recoger'}
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.navigate([''])
+      })
+
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
 
 
-  openDialog(): void {
+  openDialog1(): void {
     if (this.authenticated) {
-      this.placeOrder()
+      this.reserveAndPay()
     }
     else {
       let dialogRef = this.dialog.open(LoginDialogComponent, {
@@ -136,6 +185,25 @@ export class OrderComponent implements OnInit, OnDestroy {
       });*/
     }
   }
+
+  openDialog2(): void {
+    if (this.authenticated) {
+      this.payAtPickUp()
+    }
+    else {
+      let dialogRef = this.dialog.open(LoginDialogComponent, {
+        width: '350px',
+        data: { name: '', animal: '' }
+      });
+      /*dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.animal = result;
+      });*/
+    }
+  }
+
+  
+
 
   // Returns true if user is logged in
   get authenticated(): boolean {

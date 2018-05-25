@@ -7,6 +7,11 @@ export const environment = {
 
   production: false,
 
+  //stripeKey: 'sk_test_wF9Y7dO9lJ8503c99kyKX3rQ',
+
+  stripeKey: 'pk_test_dEuDdsQJA2zd0gGVy5ney40x',
+
+
   firebaseConfig: {
     apiKey: "AIzaSyAMISaI2G8XYizNoMqdxmH7QcLKajMeO0g",
     authDomain: "helloworld-a6508.firebaseapp.com",

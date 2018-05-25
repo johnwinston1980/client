@@ -48,14 +48,11 @@ export class DetailsProviderComponent implements OnInit {
 
     this.broadcastObjService.currentProvider.subscribe(provider => {
       this.provider = provider
-
       this.stars = this.starService.getMovieStars(provider.id)
-
       this.avgRating = this.stars.map(arr => {
         const ratings = arr.map(v => v.value)
         return ratings.length ? ratings.reduce((total, val) => total + val) / arr.length : 'not reviewed'
       })
-
     })
   }
 
@@ -82,7 +79,7 @@ export class DetailsProviderComponent implements OnInit {
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
 
-    return day + ' ' + monthNames[monthIndex];
+    return day + ' ' + monthNames[monthIndex] + ' ' + year;
   }
 
 }

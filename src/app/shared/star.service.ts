@@ -25,7 +25,7 @@ export class StarService {
     return starsRef.valueChanges();
   }
 
-  // Get all stars that belog to a Movie
+  // Get all stars that belong to a Movie
   getMovieStars(entityId) {
     const starsRef = this.afs.collection('stars', ref => ref.where('entityId', '==', entityId).orderBy('postedDate', 'desc'));
     return starsRef.valueChanges();

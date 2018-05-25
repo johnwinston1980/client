@@ -1,18 +1,36 @@
-<mat-nav-list>
+<div class="container">
+
+
+  <mat-nav-list>
     <mat-list-item *ngFor="let key of products.keys()">
 
-        <img matListAvatar src="{{products.get(key).image}}">
-        <h4 matLine>{{products.get(key).name}}</h4>
-        <p matLine class="demo-2"> {{products.get(key).price}} USD</p>
+      <img matListAvatar src="{{products.get(key).image}}">
+      <h4 matLine>{{products.get(key).name}}</h4>
+      <p matLine class="demo-2"> {{products.get(key).price}} USD</p>
 
-      </mat-list-item>
- </mat-nav-list>
+    </mat-list-item>
+  </mat-nav-list>
 
- <button mat-button color="primary" (click)="open()">Hora de recogida</button>
- {{pickupTime}}
+  <div class="timer">
+    <mat-checkbox type="checkbox" (change)="selected($event, 15)">
+      15 minutes
+    </mat-checkbox>
+    <mat-checkbox type="checkbox" (change)="selected($event, 30)">
+      30 minutes
+    </mat-checkbox>
+    <button mat-button color="primary" (click)="open()">Hora de recogida</button>
+    {{pickupTime}}
+  </div>
 
- <mat-form-field>
-    <textarea matInput placeholder="Special instructions" [(ngModel)]="remarks"></textarea>
-  </mat-form-field>
 
-<button mat-button color="primary" (click)="openDialog()">Place order</button>
+
+  <div class="notes">
+    <mat-form-field style="width:100%">
+      <textarea matInput placeholder="Special instructions" [(ngModel)]="remarks"></textarea>
+    </mat-form-field>
+  </div>
+
+  <button mat-button color="primary" (click)="openDialog1()">Reserve & pay</button>
+  <button mat-button color="primary" (click)="openDialog2()">Pay at pick up</button>
+
+</div>

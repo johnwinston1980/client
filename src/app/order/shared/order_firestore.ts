@@ -10,5 +10,6 @@ export interface OrderFirestore{
     pickupTime?: string,
     createdDate?: Date,
     remarks?: string,
-    products?: Array<Product>
+    products?: Array<Product>,
+    paid: boolean
 }
