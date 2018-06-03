@@ -8,8 +8,8 @@
       "updateMode": "prefetch",
       "urls": [
         "https://johnwinston1980.github.io/client/index.html",
-        "https://johnwinston1980.github.io/client/inline.44a9ac79516102fe66d2.bundle.js",
-        "https://johnwinston1980.github.io/client/main.14329e0f9a1723fd66e5.bundle.js",
+        "https://johnwinston1980.github.io/client/inline.0037e40a39c1c7213acc.bundle.js",
+        "https://johnwinston1980.github.io/client/main.ca3726399707dab477fd.bundle.js",
         "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js",
         "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css"
       ],
@@ -53,13 +53,13 @@
     }
   ],
   "hashTable": {
-    "https://johnwinston1980.github.io/client/inline.44a9ac79516102fe66d2.bundle.js": "c32a75e5fc9cce7688b79166c6c5bb325deede4d",
+    "https://johnwinston1980.github.io/client/inline.0037e40a39c1c7213acc.bundle.js": "d86ed0ca55423d20432ca1df645e7cab562682db",
     "https://johnwinston1980.github.io/client/assets/512x512.jpg": "1e5f07c1ee882f0e033ce63793984623aee4affa",
-    "https://johnwinston1980.github.io/client/main.14329e0f9a1723fd66e5.bundle.js": "57cf43c4a4d50655961bbf6ec142f4162d117e4b",
+    "https://johnwinston1980.github.io/client/main.ca3726399707dab477fd.bundle.js": "905276353078fc70f93b59f33ec5e39a0c27703a",
     "https://johnwinston1980.github.io/client/assets/facebook.png": "768a4f926c1d4a8ed301d5882accaffa652673bf",
     "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js": "c6df6b403364a6a888434d069ed8f0bfb8ef3655",
     "https://johnwinston1980.github.io/client/assets/google_sign_in.png": "4ff596830b85f5c343130d5c89ae5d0b0995581a",
     "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css": "14d48667df83327375e542f3d7206432b21af1c2",
-    "https://johnwinston1980.github.io/client/index.html": "6342fc272d6c374b19d1482f89738766694e3a1e"
+    "https://johnwinston1980.github.io/client/index.html": "9284e6066c393cff2098ccb1ef54e2dbb04949f1"
   }
 }
