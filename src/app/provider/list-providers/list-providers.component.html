@@ -6,17 +6,27 @@
     </mat-grid-tile-footer> -->
 
 
-   <div class="provider_container">
+    <div class="provider_container">
       <div class="provider_pic">
         <img src="{{provider.image}}" width="130px">
       </div>
       <div class="provider_info">
         <h4>{{provider.name}}</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. </p>
+        <p>{{provider.description}}</p>
       </div>
-      <div class="provider_rating">
-        <h1>4</h1>
+      <div class="provider_rating">        
+        <rating [(ngModel)]="provider.rating" [max]="5"        
+        fullIcon="★"
+        emptyIcon="☆"
+        [readonly]="false"
+        [disabled]="false"
+        [required]="true"
+        [float]="true"
+        [titles]="['one', 'two', 'three', 'four', 'five']"></rating>
+        <h6>{{provider.reviews}}</h6>
+        <i class="material-icons">
+          perm_identity
+          </i>
       </div>
     </div>
 

@@ -15,6 +15,9 @@
                 <li *ngIf="!(userAuthState | async)">
                     <div class="facebook" (click)="login()"></div>
                 </li>
+                <li>
+                    <div class="email" (click)="loginWithEmail()">Email</div>
+                </li>
                 <li *ngIf="(userAuthState | async)">
                     <a (click)="logout()">Logout 1</a>
                 </li>

@@ -15,6 +15,7 @@ import { User } from '../../shared/user'
   templateUrl: './details-provider.component.html',
   styleUrls: ['./details-provider.component.css']
 })
+
 export class DetailsProviderComponent implements OnInit {
 
   provider: any
@@ -59,6 +60,7 @@ export class DetailsProviderComponent implements OnInit {
   starHandler(value) {
     if (this.authenticated) {
       this.starService.setStar(this.user.uid, this.user.displayName, this.user.photoURL, this.provider.id, value, this.remarks)
+      this.starService.updateRating(this.provider)
     }
   }
 

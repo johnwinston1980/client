@@ -6,6 +6,9 @@ import { AppRoutingModule } from './/app-routing.module'
 
 import { AgmCoreModule } from '@agm/core';
 
+
+import {AngularFirestore} from 'angularfire2/firestore';
+
 import {AngularFireModule} from 'angularfire2';
 import {AngularFireAuthModule } from 'angularfire2/auth';
 import {AngularFireDatabaseModule } from 'angularfire2/database';
@@ -49,9 +52,12 @@ import { ListOrdersProviderComponent } from './order/list-orders-provider/list-o
 import { OrderDialogComponent } from './dialogs/order-dialog/order-dialog.component'
 
 import { QRCodeModule } from 'ng-qrcode';
+import {RatingModule} from "ngx-rating";
 
 import { HttpClientModule } from '@angular/common/http';
 import { StarService } from './shared/star.service';
+import { ProviderService } from './provider/shared/provider.service';
+import { PasswordlessAuthComponent } from './main/passwordless-auth/passwordless-auth.component'
 
 
 @NgModule({
@@ -71,7 +77,7 @@ import { StarService } from './shared/star.service';
     DetailsProviderComponent,
     ContentProviderComponent,
     ListOrdersProviderComponent,    
-    OrderDialogComponent,    
+    OrderDialogComponent, PasswordlessAuthComponent,    
   ],
   imports: [
     BrowserModule,   
@@ -90,11 +96,13 @@ import { StarService } from './shared/star.service';
     FormsModule,  
     AmazingTimePickerModule,
     QRCodeModule,
-    HttpClientModule  
+    HttpClientModule,
+    RatingModule,
   ],
   entryComponents: [ LoginDialogComponent, MessageDialogComponent, OrderDialogComponent ],
-  providers: [ BroadcastObjectService, CategoryService, ProductService, OrdersUserService, StarService, ],
+  providers: [ BroadcastObjectService, CategoryService, ProductService, OrdersUserService, StarService, ProviderService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
+
 export class AppModule { }

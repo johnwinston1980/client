@@ -75,7 +75,7 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
 
-    if (!_.isEmpty(localStorage.getItem('position'))) {
+    if  (!_.isEmpty(localStorage.getItem('position'))) {
       this.latitude = parseFloat(localStorage.getItem('lat'))
       this.longitude = parseFloat(localStorage.getItem('lng'))
       this.zoom = 11;

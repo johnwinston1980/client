@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-
 import { ProviderService } from '../shared/provider.service'
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-
 import { BroadcastObjectService } from '../../shared/broadcast-object.service'
+
+import {RatingModule} from "ngx-rating";
 
 @Component({
   selector: 'app-list-providers',

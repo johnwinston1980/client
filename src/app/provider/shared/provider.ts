@@ -7,4 +7,7 @@ export interface Provider{
   image?: string
   address?: Address  
   distance?: string
+  description?: string
+  rating?: number
+  reviews?: number
 }

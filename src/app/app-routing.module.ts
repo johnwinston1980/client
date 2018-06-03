@@ -12,8 +12,10 @@ import { ListOrdersComponent } from './order/list-orders/list-orders.component'
 import { ListOrdersProviderComponent } from './order/list-orders-provider/list-orders-provider.component'
 import { MenuComponent } from './menu/menu/menu.component'
 import { ContentProviderComponent } from './provider/content-provider/content-provider.component'
+import { PasswordlessAuthComponent } from './main/passwordless-auth/passwordless-auth.component'
 
 const routes: Routes = [
+  { path: 'login', component: PasswordlessAuthComponent },
   { path: '', component: MainComponent },
   { path: 'content/:provId', component: ContentProviderComponent },
   { path: 'menu/:provId', component: MenuComponent },

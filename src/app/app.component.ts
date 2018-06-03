@@ -63,6 +63,10 @@ export class AppComponent implements OnInit {
 
   }
 
+  loginWithEmail(){
+    this.router.navigate(['/login']);
+  }
+
   login() {
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then((success) => {
       this.user.uid = success.user.uid;
