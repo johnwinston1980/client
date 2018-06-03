@@ -38,7 +38,7 @@ export class PasswordlessAuthComponent implements OnInit {
   async sendEmailLink() {
     const actionCodeSettings = { 
       // Your redirect URL
-      url: 'https://localhost:4200/login', 
+      url: 'https://johnwinston1980.github.io/client/login', 
       handleCodeInApp: true, }
       
     try {
