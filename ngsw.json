@@ -8,8 +8,8 @@
       "updateMode": "prefetch",
       "urls": [
         "https://johnwinston1980.github.io/client/index.html",
-        "https://johnwinston1980.github.io/client/inline.0037e40a39c1c7213acc.bundle.js",
-        "https://johnwinston1980.github.io/client/main.ca3726399707dab477fd.bundle.js",
+        "https://johnwinston1980.github.io/client/inline.52f061d8ae982bd93a26.bundle.js",
+        "https://johnwinston1980.github.io/client/main.3a931d6936ee564ac1b2.bundle.js",
         "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js",
         "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css"
       ],
@@ -53,13 +53,13 @@
     }
   ],
   "hashTable": {
-    "https://johnwinston1980.github.io/client/inline.0037e40a39c1c7213acc.bundle.js": "d86ed0ca55423d20432ca1df645e7cab562682db",
+    "https://johnwinston1980.github.io/client/inline.52f061d8ae982bd93a26.bundle.js": "36ae6ad7888a505874e3b62a79378878f8b378bb",
     "https://johnwinston1980.github.io/client/assets/512x512.jpg": "1e5f07c1ee882f0e033ce63793984623aee4affa",
-    "https://johnwinston1980.github.io/client/main.ca3726399707dab477fd.bundle.js": "905276353078fc70f93b59f33ec5e39a0c27703a",
+    "https://johnwinston1980.github.io/client/main.3a931d6936ee564ac1b2.bundle.js": "37d6716b71b751e571e5137227489e98b9c2c8c9",
     "https://johnwinston1980.github.io/client/assets/facebook.png": "768a4f926c1d4a8ed301d5882accaffa652673bf",
     "https://johnwinston1980.github.io/client/polyfills.abdf53ca655716e505e0.bundle.js": "c6df6b403364a6a888434d069ed8f0bfb8ef3655",
     "https://johnwinston1980.github.io/client/assets/google_sign_in.png": "4ff596830b85f5c343130d5c89ae5d0b0995581a",
     "https://johnwinston1980.github.io/client/styles.15ddbac5e20d4b96e984.bundle.css": "14d48667df83327375e542f3d7206432b21af1c2",
-    "https://johnwinston1980.github.io/client/index.html": "9284e6066c393cff2098ccb1ef54e2dbb04949f1"
+    "https://johnwinston1980.github.io/client/index.html": "3a92960f66882cbb4b0210c1d4b08c102fb77143"
   }
 }
