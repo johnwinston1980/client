@@ -10,9 +10,20 @@
             <p>{{provider.description}} </p>
         </div>
 
-        <div class="provider_rating">
-                <h1>{{ avgRating | async }}</h1>
-                </div>
+        <div class="provider_rating">        
+            <rating [(ngModel)]="provider.rating" [max]="5"        
+            fullIcon="★"
+            emptyIcon="☆"
+            [readonly]="false"
+            [disabled]="false"
+            [required]="true"
+            [float]="true"
+            [titles]="['one', 'two', 'three', 'four', 'five']"></rating>
+            <h6>{{provider.reviews}}</h6>
+            <i class="material-icons">
+              perm_identity
+              </i>
+          </div>
 
     </div>
 

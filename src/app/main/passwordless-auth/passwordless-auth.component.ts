@@ -74,6 +74,8 @@ export class PasswordlessAuthComponent implements OnInit {
     
           localStorage.setItem('user', JSON.stringify(this.user));
           this.broadcastObjectService.broadcastUser(this.user);
+          this.router.navigate(['']);
+
         }
         ).catch((err) => {
           console.log(err);
