@@ -6,6 +6,8 @@ import { AppRoutingModule } from './/app-routing.module'
 
 import { AgmCoreModule } from '@agm/core';
 
+import {MatDialogModule} from '@angular/material';
+
 
 import {AngularFirestore} from 'angularfire2/firestore';
 

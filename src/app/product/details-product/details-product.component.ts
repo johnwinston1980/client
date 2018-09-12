@@ -12,7 +12,7 @@ import * as _ from 'lodash'
 import { Order } from '../../shared/order'
 
 @Component({
-  selector: 'app-details-product',
+  selector: 'details-product',
   templateUrl: './details-product.component.html',
   styleUrls: ['./details-product.component.css'],
   providers: [ImagesService]
@@ -29,6 +29,7 @@ export class DetailsProductComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('tamo aqui')
     this.broadcastObjectService.currentProduct.subscribe(product => {
       this.product = product
       this.imagesService.init(this.product.id)

@@ -145,6 +145,6 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.broadcastObjectService.broadcastProvider(provider)
     //this.router.navigate(['/list-categories', provider.id])
     //this.router.navigate(['/menu', provider.id])
-    this.router.navigate(['/content', provider.id])
+    this.router.navigate(['content', provider.id])
   }
 }

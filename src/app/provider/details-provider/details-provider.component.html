@@ -27,6 +27,15 @@
 
     </div>
 
+
+    <mat-grid-list cols="3" rowHeight="2:1">
+        <mat-grid-tile *ngFor="let image of images" colspan="1">
+      
+            <img src="{{image.url}}" layout-fill>
+      
+        </mat-grid-tile>
+      </mat-grid-list>
+
    
 
 

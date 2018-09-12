@@ -9,11 +9,14 @@ import { Observable } from 'rxjs/Observable';
 
 import { User } from '../../shared/user'
 
+import { ImagesService } from '../../shared/images.service'
+
 
 @Component({
   selector: 'app-provider-details',
   templateUrl: './details-provider.component.html',
-  styleUrls: ['./details-provider.component.css']
+  styleUrls: ['./details-provider.component.css'],
+  providers: [ImagesService]
 })
 
 export class DetailsProviderComponent implements OnInit {
@@ -24,11 +27,13 @@ export class DetailsProviderComponent implements OnInit {
   remarks: string
 
   user: User
+  images: any
 
   authState: any = null
 
   constructor(private broadcastObjService: BroadcastObjectService,
     private starService: StarService,
+    private imagesService: ImagesService,
     private afAuth: AngularFireAuth) {
 
     this.remarks = ''
@@ -49,6 +54,12 @@ export class DetailsProviderComponent implements OnInit {
 
     this.broadcastObjService.currentProvider.subscribe(provider => {
       this.provider = provider
+
+      this.imagesService.init(this.provider.id)
+      this.imagesService.getImages().subscribe(images => {
+        this.images = images
+      })
+
       this.stars = this.starService.getMovieStars(provider.id)
       this.avgRating = this.stars.map(arr => {
         const ratings = arr.map(v => v.value)
