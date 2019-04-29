@@ -1,6 +1,6 @@
 <mat-grid-list cols="2" rowHeight="1.5:1">
   <mat-grid-tile *ngFor="let category of categories" (click)="showProducts(category.id)">
-    <img src="{{category.image}}" layout-fill>
+    <img src="{{category.url}}" layout-fill>
     <!--<mat-grid-tile-header>
       <h3>{{ category.name }}</h3>
     </mat-grid-tile-header>-->

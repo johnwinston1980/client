@@ -24,7 +24,7 @@ export class ListProvidersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.providerService.getProviders().subscribe(providers => {
-      this.providers = providers;
+      this.providers = providers;      
     })
   }
 

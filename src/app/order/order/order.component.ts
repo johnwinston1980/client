@@ -78,10 +78,11 @@ export class OrderComponent implements OnInit, OnDestroy {
 
     this.handler = StripeCheckout.configure({
       key: environment.stripeKey,
-      image: this.provider.image,
+      image: this.provider.url,
       locale: 'auto',
       token: token => {
         this.paymentSvc.processPayment(token, this.amount).then(res => {
+          console.log('create order true')
           this.createOrder(true)
         })
       },
@@ -113,7 +114,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   handlePayment() {
     this.handler.open({
       name: this.provider.name,
-      excerpt: 'Deposit Funds to Account',
+      //excerpt: 'Deposit Funds to Account',
       amount: this.amount
     });
   }

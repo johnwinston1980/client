@@ -23,6 +23,7 @@ export class OrdersProviderService {
 
   providerId: string
   userId: string
+  orderDate: string
 
   constructor(private afs: AngularFirestore, private ordersUserService: OrdersUserService) { }
 
@@ -30,8 +31,12 @@ export class OrdersProviderService {
     this.providerId = providerId
     this.userId = userId
 
+    var d = new Date();
+
+    this.orderDate = d.getFullYear() + '/' + d.getMonth() + '/' + (d.getDate() + 2)
+
     this.ordersCollection = this.afs.collection(
-      `orders/${this.providerId}/list`, 
+      `orders/${this.providerId}/${this.orderDate}`, 
        ref => ref.where('userId', '==', `${userId}`).orderBy('createdDate', 'asc')
       );
 
@@ -50,7 +55,7 @@ export class OrdersProviderService {
   }
 
   getOrderDetails(id) {
-    this.orderDoc = this.afs.doc(`orders/${this.providerId}/list/${id}`);
+    this.orderDoc = this.afs.doc(`orders/${this.providerId}/${this.orderDate}/${id}`);
     return this.orderDoc;
   }
 
@@ -83,6 +88,7 @@ export class OrdersProviderService {
 
     let orderFirestore: OrderFirestore = {
       userId: user.uid,
+      displayName: user.displayName,
       providerId: provider.id,
       providerName: provider.name,
       pickupTime: pickupTime,
@@ -109,12 +115,12 @@ export class OrdersProviderService {
   }
 
   deleteOrder(id: string) {
-    this.orderDoc = this.afs.doc(`orders/${this.providerId}/list/${id}`);
+    this.orderDoc = this.afs.doc(`orders/${this.providerId}/${this.orderDate}/${id}`);
     this.orderDoc.delete();
   }
 
   updateOrder(order: OrderFirestore) {
-    this.orderDoc = this.afs.doc(`orders/${this.providerId}/list/${order.id}`);
+    this.orderDoc = this.afs.doc(`orders/${this.providerId}/${this.orderDate}/${order.id}`);
     this.orderDoc.update(order);
   }
 

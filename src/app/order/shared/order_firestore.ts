@@ -3,6 +3,7 @@ import { Product } from '../../product/shared/product'
 export interface OrderFirestore{
     id?: string,
     userId?: string,
+    displayName?: string,
     providerId?: string,  
     providerName?: string,  
     providerImage?: string,

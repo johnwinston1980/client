@@ -55,6 +55,8 @@ export class DetailsProviderComponent implements OnInit {
     this.broadcastObjService.currentProvider.subscribe(provider => {
       this.provider = provider
 
+      console.log(this.provider)
+
       this.imagesService.init(this.provider.id)
       this.imagesService.getImages().subscribe(images => {
         this.images = images
@@ -80,7 +82,7 @@ export class DetailsProviderComponent implements OnInit {
     return this.authState !== null;
   }
 
-  formatDate(date): string {
+  formatDate(date: Date): string {
     var monthNames = [
       "January", "February", "March",
       "April", "May", "June", "July",
@@ -88,7 +90,7 @@ export class DetailsProviderComponent implements OnInit {
       "November", "December"
     ];
 
-    var day = date.getDate();
+    var day = date.getDay();
     var monthIndex = date.getMonth();
     var year = date.getFullYear();
 
