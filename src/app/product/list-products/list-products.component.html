@@ -20,7 +20,7 @@
 
 <mat-nav-list>
   <mat-list-item *ngFor="let product of products" (click)="showDetails(product)">
-    <img matListAvatar src="{{product.image}}">
+    <img matListAvatar src="{{product.url}}">
     <h3 matLine *ngIf="!isSelected(product)">{{ product.name }}</h3>
     <h3 matLine *ngIf="isSelected(product)" class="text-color">{{ product.name }}</h3>
     <h3 matLine>{{ product.description }}</h3>

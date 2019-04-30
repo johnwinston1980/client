@@ -4,7 +4,7 @@
   <mat-nav-list>
     <mat-list-item *ngFor="let key of products.keys()">
 
-      <img matListAvatar src="{{products.get(key).image}}">
+      <img matListAvatar src="{{products.get(key).url}}">
       <h4 matLine>{{products.get(key).name}}</h4>
       <p matLine class="demo-2"> {{products.get(key).price}} USD</p>
 
