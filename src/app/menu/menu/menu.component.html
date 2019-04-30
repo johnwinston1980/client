@@ -4,7 +4,7 @@
       <h1 matSubheader>{{menuItem.categoryName}}</h1>
 
       <mat-list-item *ngFor="let product of menuItem.products" >
-        <img matListAvatar src="{{product.image}}" (click)="showDetails(product)">
+        <img matListAvatar src="{{product.url}}" (click)="showDetails(product)">
         <h4 matLine>{{product.name}}</h4>
         <p matLine class="demo-2"> {{product.description}} </p>
         <h4 matLine>{{product.price}}</h4>

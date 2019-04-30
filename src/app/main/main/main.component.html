@@ -9,7 +9,7 @@
       </agm-marker>
       <agm-marker *ngFor="let provider of providers" [latitude]="provider.address.lat" [longitude]="provider.address.lng">
         <agm-info-window>
-          <img src="{{provider.image}}" width="50px" height="50px">
+          <img src="{{provider.url}}" width="50px" height="50px">
           <h3>{{provider.name}}</h3>
           <p>{{provider.address.formatted_address}}</p>
           <!--<p>{{provider.distance}}</p>-->
